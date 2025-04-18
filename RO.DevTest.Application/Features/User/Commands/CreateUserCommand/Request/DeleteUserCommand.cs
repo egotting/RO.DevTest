@@ -2,11 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
+using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Response.General;
+using RO.DevTest.Domain.Enums;
 
 namespace RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Request
 {
-    public class DeleteUserCommand
+    public class DeleteUserCommand : IRequest<GeneralResult<ResponseStatus.ResponseStatus>>
     {
-        
+        public DeleteUserCommand(string email, string password, string confirmPassword)
+        {
+            Email = email;
+            Password = password;
+            ConfirmPassword = confirmPassword;
+        }
+
+        public DeleteUserCommand() { }
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string ConfirmPassword { get; set; } = string.Empty;
+
     }
 }
