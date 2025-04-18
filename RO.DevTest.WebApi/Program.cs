@@ -19,7 +19,7 @@ public class Program
         builder.Services.InjectPersistenceDependencies()
             .InjectInfrastructureDependencies();
 
-        var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings");
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<Persistence.DefaultContext>(options =>
         {
             options.UseNpgsql(connectionString);
