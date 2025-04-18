@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 
 namespace RO.DevTest.Domain.Enums;
-public enum UserRoles {
+public enum UserRoles
+{
     [Description("Admin")]
-    Admin = 0,
+    Admin,
     [Description("Customer")]
-    Customer = 1,
+    Customer
 }
