@@ -5,6 +5,7 @@ using NSwag.Annotations;
 using RO.DevTest.Application.Features.User.Commands.CreateUserCommand;
 using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Request;
 using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Response;
+using RO.DevTest.Application.ResultPattern;
 
 namespace RO.DevTest.WebApi.Controllers;
 
@@ -17,9 +18,9 @@ public class UsersController(IMediator mediator) : ControllerBase {
     [HttpPost]
     [ProducesResponseType(typeof(CreateUserResult), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(CreateUserResult), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateUser( CreateUserCommand request) {
+    public async Task<IResult> CreateUser( CreateUserCommand request) {
         var response = await _mediator.Send(request);
         
-        return Created(HttpContext.Request.GetDisplayUrl(), response);
+        return Results.Extensions.MapResult(response);
     }
 }
