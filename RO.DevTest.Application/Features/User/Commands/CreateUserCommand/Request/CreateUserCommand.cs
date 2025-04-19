@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Response.General;
+using RO.DevTest.Application.ResultPattern;
 using RO.DevTest.Domain.Enums;
 
 namespace RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Request;
 
-public class CreateUserCommand : IRequest<GeneralResult<ResponseStatus.ResponseStatus>>
+public class CreateUserCommand : IRequest<Result<Error>>
 {
     public string UserName { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;

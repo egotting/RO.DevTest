@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
-using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Response.General;
+using RO.DevTest.Application.ResultPattern;
 using RO.DevTest.Domain.Enums;
 
 namespace RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Request
 {
-    public class DeleteUserCommand : IRequest<GeneralResult<ResponseStatus.ResponseStatus>>
+    public class DeleteUserCommand : IRequest<Result<Error>>
     {
         public DeleteUserCommand(string email, string password, string confirmPassword)
         {
