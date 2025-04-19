@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RO.DevTest.Application.Contracts.Infrastructure;
+using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Handler;
+using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Handler.Interface;
+using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Request;
+using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Validator;
 using RO.DevTest.Domain.Entities;
 using RO.DevTest.Infrastructure.Abstractions;
 using RO.DevTest.Persistence;
@@ -26,6 +32,21 @@ public static class InfrastructureDependecyInjector {
 
         services.AddScoped<IIdentityAbstractor, IdentityAbstractor>();
 
+        return services;
+    }
+    
+    public static IServiceCollection ConfigureHandlers(this IServiceCollection services)
+    {
+
+        services.AddScoped<ICreateUserCommandHandler, CreateUserCommandHandler>();
+        return services;
+    }
+
+    public static IServiceCollection ValidatorInjection(this IServiceCollection services)
+    {
+        services.AddScoped<IValidator<CreateUserCommand>, CreateUserCommandValidator>();
+        services.AddScoped<IValidator<DeleteUserCommand>, DeleteUserCommandValidator>();
+        services.AddScoped<IValidator<UpdateUserCommand>, UpdateUserCommandValidator>();
         return services;
     }
 }
