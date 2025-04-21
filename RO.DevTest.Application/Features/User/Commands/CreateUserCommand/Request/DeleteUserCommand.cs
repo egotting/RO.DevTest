@@ -10,17 +10,15 @@ namespace RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Reques
 {
     public class DeleteUserCommand : IRequest<Result<Error>>
     {
-        public DeleteUserCommand(string email, string password, string confirmPassword)
+        public DeleteUserCommand(string email, string password)
         {
             Email = email;
             Password = password;
-            ConfirmPassword = confirmPassword;
         }
 
         public DeleteUserCommand() { }
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string ConfirmPassword { get; set; } = string.Empty;
 
     }
 }
