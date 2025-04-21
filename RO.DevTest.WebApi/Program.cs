@@ -19,14 +19,12 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         var CString = builder.Configuration.GetConnectionString("DefaultConnection");
-        builder.Services.AddDbContext<DefaultContext>(opt =>
-        {
-            opt.UseNpgsql(CString);
-        });
+        builder.Services.AddDbContext<DefaultContext>(opt => { opt.UseNpgsql(CString); });
 
-        builder.Services.InjectPersistenceDependencies().InjectInfrastructureDependencies();
-        builder.Services.InjectPersistenceDependencies().ConfigureHandlers();
-        builder.Services.InjectPersistenceDependencies().ValidatorInjection();
+        builder.Services.InjectInfrastructureDependencies();
+        builder.Services.ConfigureHandlers();
+        builder.Services.ValidatorInjection();
+        builder.Services.InjectUserRepository();
         // Add Mediatr to program
         builder.Services.AddMediatR(cfg =>
         {
