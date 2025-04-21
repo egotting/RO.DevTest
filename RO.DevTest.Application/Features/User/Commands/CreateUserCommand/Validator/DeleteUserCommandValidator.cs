@@ -17,9 +17,6 @@ namespace RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Valida
             RuleFor(cpau => cpau.Password)
                 .MinimumLength(6)
                 .WithMessage("O campo senha precisa ter, pelo menos, 6 caracteres");
-            RuleFor(cpau => cpau.ConfirmPassword)
-                .Matches(cpau => cpau.Password)
-                .WithMessage("O campo de confirmação de senha deve ser igual ao campo senha");
         }
     }
 }
