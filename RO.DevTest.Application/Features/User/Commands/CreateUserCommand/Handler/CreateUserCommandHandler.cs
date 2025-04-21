@@ -23,7 +23,7 @@ public class CreateUserCommandHandler(IIdentityAbstractor identityAbstractor) : 
         if (!validationResult.IsValid)
         {
             return Result<Error>.Failure(Error.Validation("User.Not.Valid", 
-                "Labels need to be filled"));
+                "User invalid."));
         }
 
         Domain.Entities.User newUser = request.AssignTo();
