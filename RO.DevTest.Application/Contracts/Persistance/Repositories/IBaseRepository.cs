@@ -2,8 +2,8 @@
 
 namespace RO.DevTest.Application.Contracts.Persistance.Repositories;
 
-public interface IBaseRepository<T> where T : class {
-
+public interface IBaseRepository<T> where T : class
+{
     /// <summary>
     /// Creates a new entity in the database
     /// </summary>
@@ -34,4 +34,12 @@ public interface IBaseRepository<T> where T : class {
     /// </summary>
     /// <param name="entity"> The entity to be deleted </param>
     void Delete(T entity);
+
+    Task<IEnumerable<T>> GetAll(
+        Expression<Func<T, bool>>? predicate = null, 
+        Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+        int? skip = null,
+        int? take = null,
+        params Expression<Func<T, object>>[] includes
+        );
 }
