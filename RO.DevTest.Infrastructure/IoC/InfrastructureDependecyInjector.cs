@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RO.DevTest.Application.Contracts.Infrastructure;
+using RO.DevTest.Application.Contracts.Persistance.Repositories;
 using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Handler;
 using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Handler.Interface;
 using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Request;
@@ -10,6 +11,7 @@ using RO.DevTest.Application.Features.User.Commands.CreateUserCommand.Validator;
 using RO.DevTest.Domain.Entities;
 using RO.DevTest.Infrastructure.Abstractions;
 using RO.DevTest.Persistence;
+using RO.DevTest.Persistence.Repositories;
 
 namespace RO.DevTest.Infrastructure.IoC;
 
@@ -34,11 +36,20 @@ public static class InfrastructureDependecyInjector {
 
         return services;
     }
-    
+
+    public static IServiceCollection InjectUserRepository(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+        services.AddScoped<IUserRepository, UserRepository>();
+        return services;
+    }
     public static IServiceCollection ConfigureHandlers(this IServiceCollection services)
     {
 
         services.AddScoped<ICreateUserCommandHandler, CreateUserCommandHandler>();
+        services.AddScoped<IDeleteUserCommandHandler, DeleteUserCommandHandler>();
+        services.AddScoped<IGetUsersCommandHandler, GetUsersCommandHandler>();
+        
         return services;
     }
 
@@ -47,6 +58,7 @@ public static class InfrastructureDependecyInjector {
         services.AddScoped<IValidator<CreateUserCommand>, CreateUserCommandValidator>();
         services.AddScoped<IValidator<DeleteUserCommand>, DeleteUserCommandValidator>();
         services.AddScoped<IValidator<UpdateUserCommand>, UpdateUserCommandValidator>();
+        
         return services;
     }
 }
